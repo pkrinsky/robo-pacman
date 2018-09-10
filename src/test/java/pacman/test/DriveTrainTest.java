@@ -1,4 +1,4 @@
-package pacman;
+package pacman.test;
 import static org.junit.Assert.assertEquals;
 
 /*
