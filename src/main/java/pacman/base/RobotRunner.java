@@ -21,7 +21,7 @@ public class RobotRunner {
 		PacmanGraphics graphics = new PacmanGraphics();
 		graphics.setup();
 		
-		while (running && PacmanGraphics.getTime() < 30) {
+		while (running && graphics.getTime() < 30) {
 			
 			CommandBase command = group.getCommand(currentCommand);
 			
@@ -63,7 +63,7 @@ public class RobotRunner {
 			
 		}
 		
-		Util.log("RobotRunner:done score:"+PacmanGraphics.getScore());
+		Util.log("RobotRunner:done score:"+graphics.getScore());
 		
 	}
 

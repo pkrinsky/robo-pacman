@@ -29,8 +29,8 @@ public class PacmanGraphics extends Canvas{
 	
 	public static final int HEIGHT = 600;
 	public static final int WIDTH = 600;
-	private static int score = 0;
-	private static long startTime = 0;
+	private int score = 0;
+	private long startTime = 0;
 
 	private BufferStrategy strategy;
 	private BufferedImage robotImage;
@@ -54,11 +54,11 @@ public class PacmanGraphics extends Canvas{
 		return sourceImage;
 	}
 	
-	public static int getScore() {
+	public int getScore() {
 		return score;
 	}
 	
-	public static long getTime() {
+	public long getTime() {
 		return (System.currentTimeMillis() - startTime) / 1000;
 	}
 

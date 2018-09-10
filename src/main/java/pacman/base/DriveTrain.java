@@ -9,7 +9,7 @@ public class DriveTrain {
 	private int angle = 0;
 	private int posX = PacmanGraphics.WIDTH / 2;
 	private int posY = PacmanGraphics.HEIGHT - 100;
-	private int speed = 5;
+	private int speed = 0;
 	
 	public double getDistance() {
 		return distance; 
@@ -62,6 +62,7 @@ public class DriveTrain {
 				Util.log("DriveTrainBase:tankDrive right to:"+angle);
 			} else {
 				Util.log("DriveTrainBase:tankDrive cant turn while moving");
+				speed = 0;
 			}
 		} else if (right >= 0 && right > left) {
 			if (speed == 0) {
@@ -69,6 +70,7 @@ public class DriveTrain {
 				Util.log("DriveTrainBase:tankDrive left to:"+angle);
 			} else {
 				Util.log("DriveTrainBase:tankDrive cant turn while moving");
+				speed = 0;
 			}
 			
 		}
