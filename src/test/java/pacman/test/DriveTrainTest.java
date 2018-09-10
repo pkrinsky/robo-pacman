@@ -11,7 +11,7 @@ import pacman.base.DriveTrain;
 public class DriveTrainTest {
 
     
-    @Test public void testDriveTrainSpeed() {
+    @Test public void testSpeed() {
     	DriveTrain dt = new DriveTrain();
     	
     	// starting speed should be zero
@@ -52,5 +52,44 @@ public class DriveTrainTest {
 
     }
     
+    @Test public void testAngle() {
+    	DriveTrain dt = new DriveTrain();
+    	
+    	// starting angle should be zero
+    	assertEquals("Angle zero",0,dt.getAngle());
+    	
+    	// right turn
+    	dt.tankDrive(1,0);
+    	assertEquals("Angle error",90,dt.getAngle());
 
+    	dt.tankDrive(1,0);
+    	assertEquals("Angle error",180,dt.getAngle());
+
+    	dt.tankDrive(1,0);
+    	assertEquals("Angle error",-90,dt.getAngle());
+
+    	dt.tankDrive(1,0);
+    	assertEquals("Angle error",0,dt.getAngle());
+    	
+    	// left turn
+    	dt.tankDrive(0,1);
+    	assertEquals("Angle error",-90,dt.getAngle());
+
+    	dt.tankDrive(0,1);
+    	assertEquals("Angle error",180,dt.getAngle());
+
+    	dt.tankDrive(0,1);
+    	assertEquals("Angle error",90,dt.getAngle());
+
+    	dt.tankDrive(0,1);
+    	assertEquals("Angle error",0,dt.getAngle());
+
+    	// partial left turn should still be 90 degrees
+    	dt.tankDrive(0,0.5);
+    	assertEquals("Angle error",-90,dt.getAngle());
+    	
+    	dt.tankDrive(0.5,0);
+    	assertEquals("Angle error",0,dt.getAngle());
+    	
+    }
 }
