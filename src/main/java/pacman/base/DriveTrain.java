@@ -59,7 +59,7 @@ public class DriveTrain {
 			// RIGHT TURN
 			if (speed == 0) {
 				angle += 90;	
-				Util.log("DriveTrainBase:tankDrive right to:"+angle);
+				Util.log("DriveTrainBase:tankDrive right to angle:"+angle);
 			} else {
 				Util.log("DriveTrainBase:tankDrive cant turn while moving");
 				speed = 0;
@@ -67,7 +67,7 @@ public class DriveTrain {
 		} else if (right >= 0 && right > left) {
 			if (speed == 0) {
 				angle -= 90;	
-				Util.log("DriveTrainBase:tankDrive left to:"+angle);
+				Util.log("DriveTrainBase:tankDrive left to angle:"+angle);
 			} else {
 				Util.log("DriveTrainBase:tankDrive cant turn while moving");
 				speed = 0;

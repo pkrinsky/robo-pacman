@@ -15,7 +15,7 @@ public class RobotRunner {
 		int currentCommand = 0;
 		boolean runInit = true;
 		
-		Util.log("RobotRunner:robotInit");
+		Util.log("RobotRunner:robot.robotInit");
 		robot.robotInit();
 		
 		PacmanGraphics graphics = new PacmanGraphics();
@@ -23,30 +23,37 @@ public class RobotRunner {
 		
 		while (running && graphics.getTime() < 30) {
 			
+			// get a command from the group
 			CommandBase command = group.getCommand(currentCommand);
 			
-			// check to see if this command is finished
+			// check to see if this command is finished and get another
 			if (command != null) {
-				Util.log("RobotRunner:got command "+command.getClass().getName()+" isFinished:"+command.isFinished());
-				if (command.isFinished()) {
-					currentCommand ++;
-					runInit = true;
-					command = group.getCommand(currentCommand);
-					if (command != null)
-						Util.log("RobotRunner:got next command "+command.getClass().getName());
-				}
-			} else {
-				Util.log("RobotRunner:no commands to run");
+				// if command has been initialized then check to see if it is finished
+				if (!runInit) {
+					Util.log("RobotRunner: check if command is finished");
+					boolean finished = command.isFinished(); 
+					if (finished) {
+						Util.log("RobotRunner:command "+command.getClass().getName()+" isFinished: true");
+						currentCommand ++;
+						runInit = true;
+						command = group.getCommand(currentCommand);
+						if (command != null) Util.log("RobotRunner:got next command "+command.getClass().getName());
+					} else {
+						Util.log("RobotRunner:command "+command.getClass().getName()+" isFinished: false");
+					}
+				} 
 			}
 			
 			if (command == null) {
 				running = false;
+				Util.log("RobotRunner:no commands to run");
 			} else {
 				if (runInit) {
+					Util.log("RobotRunner:initialize command "+command.getClass().getName());
 					command.initialize();
 					runInit = false;
 				}
-				Util.log("RobotRunner:execute "+command.getClass().getName());
+				Util.log("RobotRunner:execute command "+command.getClass().getName());
 				command.execute();	
 			}
 			

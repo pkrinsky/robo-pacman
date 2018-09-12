@@ -4,6 +4,7 @@ import pacman.base.RobotBase;
 import pacman.base.RobotRunner;
 import pacman.base.Util;
 import pacman.commands.AutoGroup;
+import pacman.commands.SpinGroup;
 
 public class Robot extends RobotBase {
 	
@@ -12,8 +13,15 @@ public class Robot extends RobotBase {
 	}	
 	
 	public static void main(String[] args) {
+		// create a new robot
 		Robot robot = new Robot();
+		
+		// run the spin routine
+		RobotRunner.run(robot, new SpinGroup());
+		
+		// run the auto routine
 		RobotRunner.run(robot, new AutoGroup());
+
 	}		
 
 }
