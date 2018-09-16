@@ -27,9 +27,6 @@ public class SpinOnce extends CommandBase {
 		// keep track of the number of times we have turned
 		turns = turns + 1;
 		
-
-		// slow down the game so it's easier to see the logs
-		sleep(1000);
 	}
 	
 	

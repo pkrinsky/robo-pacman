@@ -11,8 +11,6 @@ public class SpinForever extends CommandBase {
 		System.out.println("Hello world, watch me spin to the right");
 		Robot.driveTrain.tankDrive(1, 0);
 		
-		// slow down the game so it's easier to see the logs
-		sleep(1000);
 	}
 	
 	
