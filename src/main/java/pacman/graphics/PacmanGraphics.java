@@ -20,6 +20,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import pacman.base.Arm;
+import pacman.base.DriveTrain;
+import pacman.base.RobotBase;
 import pacman.base.Util;
 
 
@@ -36,6 +39,9 @@ public class PacmanGraphics extends Canvas{
 	private BufferedImage robotImage;
 	private BufferedImage dotImage;
 	private List<Dot> dotList = new ArrayList<Dot>();
+
+	private DriveTrain driveTrain = DriveTrain.getInstance();
+	private Arm arm = Arm.getInstance();
 	
 	private BufferedImage getImage(String filename) {
 		BufferedImage sourceImage = null;
@@ -112,6 +118,7 @@ public class PacmanGraphics extends Canvas{
 		for (int i=0;i<4;i++) {
 			y -= 50;
 			dotList.add(new Dot(x,y));	
+			dotList.add(new Dot(x-50,y));	
 		}
 		
 		for (int i=0;i<8;i++) {
@@ -152,6 +159,8 @@ public class PacmanGraphics extends Canvas{
 			collision = true;
 			score++;
 			Util.log("YUM YUM "+score);
+		} else {
+			//System.out.printf("no collision dot %s,%s pacman %s,%s\n",dot.getX(), dot.getY(), x,y);
 		}
 		
 		return collision;
@@ -159,7 +168,8 @@ public class PacmanGraphics extends Canvas{
 	
 
 
-	public void drawField(int posX, int posY, int angle) {
+	public void drawField(RobotBase robot) {
+
 		// init the graphics system to redraw the map
 		Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 		g.setColor(Color.DARK_GRAY);
@@ -170,7 +180,11 @@ public class PacmanGraphics extends Canvas{
 		// draw the dots and check for collisions
 		for (Iterator<Dot> iterator = dotList.iterator(); iterator.hasNext();) {
 		    Dot d = iterator.next();
-			if (checkForCollision(d,posX, posY)) {
+			if (checkForCollision(d,driveTrain.getPositionX(), driveTrain.getPositionY())
+				|| checkForCollision(d,driveTrain.getPositionX()-arm.getLength(), driveTrain.getPositionY())
+				|| checkForCollision(d,driveTrain.getPositionX()+arm.getLength(), driveTrain.getPositionY())
+				)
+			{
 				iterator.remove();
 			} else {
 				g.drawImage(dotImage, d.getX(), d.getY(), null);
@@ -179,7 +193,7 @@ public class PacmanGraphics extends Canvas{
 
 		// draw pacman
 		// rotate as needed around the center of the image
-		double rotationRequired = Math.toRadians (angle);
+		double rotationRequired = Math.toRadians (driveTrain.getAngle());
 		double centerX = robotImage.getWidth() / 2;
 		double centerY = robotImage.getHeight() / 2;
 		
@@ -187,7 +201,7 @@ public class PacmanGraphics extends Canvas{
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 
 		// Drawing the rotated image at the required drawing locations
-		g.drawImage(op.filter(robotImage, null), posX, posY, null);
+		g.drawImage(op.filter(robotImage, null), driveTrain.getPositionX(), driveTrain.getPositionY(), null);
 		
 		g.setColor(Color.white);
 		g.drawString("Time "+getTime()+" Score "+score,25,25);

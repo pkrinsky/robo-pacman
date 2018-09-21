@@ -10,7 +10,14 @@ public class DriveTrain {
 	private int posX = PacmanGraphics.WIDTH / 2;
 	private int posY = PacmanGraphics.HEIGHT - 100;
 	private int speed = 0;
-	
+
+	// Singleton
+	private static DriveTrain driveTrain = new DriveTrain();
+
+	public static DriveTrain getInstance() {
+		return driveTrain;
+	}
+
 	public double getDistance() {
 		return distance; 
 	}

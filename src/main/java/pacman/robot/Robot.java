@@ -2,26 +2,24 @@ package pacman.robot;
 
 import pacman.base.RobotBase;
 import pacman.base.RobotRunner;
-import pacman.base.Util;
-import pacman.commands.*;
+import pacman.commands.AutoGroup;
 
 public class Robot extends RobotBase {
 
-	public static void log(String s) {
-		Util.log(s);
-	}	
-	
-	public static void main(String[] args) {
+	// Robot is a singleton
+	private static Robot robot = new Robot();
 
+	public static Robot getInstance() {
+		return robot;
+	}
+
+	public static void main(String[] args) {
 		// how long to wait (in ms) before the next loop
 		long delay = 100;
 
-		// create a new robot
-		Robot robot = new Robot();
-		
 		// run the command group
-		RobotRunner.run(robot, new SpinGroup(), delay);
-		
-	}		
+		RobotRunner.run(robot,new AutoGroup(), delay);
+
+	}
 
 }

@@ -1,7 +1,7 @@
 package pacman.commands;
 
 import pacman.base.CommandBase;
-import pacman.robot.Robot;
+import pacman.base.DriveTrain;
 
 public class SpinOnce extends CommandBase {
 	
@@ -22,7 +22,7 @@ public class SpinOnce extends CommandBase {
 		super.execute();
 		
 		System.out.println("Hello world, watch me spin to the right");
-		Robot.driveTrain.tankDrive(1, 0);
+		DriveTrain.getInstance().tankDrive(1, 0);
 
 		// keep track of the number of times we have turned
 		turns = turns + 1;

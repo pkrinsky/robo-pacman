@@ -1,7 +1,6 @@
 package pacman.base;
 
 import pacman.graphics.PacmanGraphics;
-import pacman.robot.Robot;
 
 public class RobotRunner {
 	
@@ -57,7 +56,7 @@ public class RobotRunner {
 				command.execute();	
 			}
 			
-			graphics.drawField(RobotBase.driveTrain.getPositionX(), RobotBase.driveTrain.getPositionY(), Robot.driveTrain.getAngle());
+			graphics.drawField(robot);
 			
 			
 			// add a little delay
