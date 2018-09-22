@@ -3,12 +3,13 @@ package pacman.commands;
 import pacman.base.CommandBase;
 import pacman.base.DriveTrain;
 import pacman.base.Util;
+import pacman.robot.Robot;
 
 public class Turn extends CommandBase {
 	
 	private boolean success = false;
 	private int targetAngle;
-	private DriveTrain driveTrain = DriveTrain.getInstance();
+	private DriveTrain driveTrain = Robot.driveTrain;
 	
 	public Turn(int angle) {
 		super();

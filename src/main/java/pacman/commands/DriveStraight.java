@@ -3,13 +3,14 @@ package pacman.commands;
 import pacman.base.CommandBase;
 import pacman.base.DriveTrain;
 import pacman.base.Util;
+import pacman.robot.Robot;
 
 public class DriveStraight extends CommandBase {
 	
 	private double targetDistance;
 	private double startDistance;
 	private boolean success = false;
-	private DriveTrain driveTrain = DriveTrain.getInstance();
+	private DriveTrain driveTrain = Robot.driveTrain;
 	
 	public DriveStraight(double distance) {
 		super();

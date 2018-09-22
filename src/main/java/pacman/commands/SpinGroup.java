@@ -6,7 +6,7 @@ public class SpinGroup extends CommandGroupBase{
 	
 	public SpinGroup() {
 		super();
-		addSequential(new Stop());
+		addSequential(new SpinForever());
 	}
 
 }

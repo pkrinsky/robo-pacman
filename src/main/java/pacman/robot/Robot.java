@@ -1,25 +1,29 @@
 package pacman.robot;
 
+import pacman.base.DriveTrain;
 import pacman.base.RobotBase;
 import pacman.base.RobotRunner;
-import pacman.commands.AutoGroup;
+import pacman.commands.*;
 
 public class Robot extends RobotBase {
 
-	// Robot is a singleton
-	private static Robot robot = new Robot();
+	public static int MAX_SPEED = 5;
+	public static long RUN_NORMAL = 50;
+	public static long RUN_FAST = 10;
+	public static long RUN_SLOW = 250;
 
-	public static Robot getInstance() {
-		return robot;
-	}
+	public static DriveTrain driveTrain = new DriveTrain();
 
 	public static void main(String[] args) {
-		// how long to wait (in ms) before the next loop
-		// 50 is normal, longer better for debugging
-		long delay = 50;
+
+		// create a robot runner
+		RobotRunner robotRunner = new RobotRunner();
+
+		// create a robot
+		Robot robot = new Robot();
 
 		// run the command group
-		RobotRunner.run(robot,new AutoGroup(), delay);
+		robotRunner.run(robot, new SpinGroup(), RUN_SLOW);
 
 	}
 

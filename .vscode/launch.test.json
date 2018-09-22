@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "robo-pacman",
+                "projectName": "robo-pacman",
+                "workingDirectory": "c:\\Users\\Paul\\Documents\\GitHub\\robo-pacman",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "robo-pacman",
+                "projectName": "robo-pacman",
+                "workingDirectory": "c:\\Users\\Paul\\Documents\\GitHub\\robo-pacman",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}

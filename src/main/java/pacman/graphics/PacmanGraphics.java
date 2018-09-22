@@ -20,10 +20,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import pacman.base.Arm;
 import pacman.base.DriveTrain;
 import pacman.base.RobotBase;
 import pacman.base.Util;
+import pacman.robot.Robot;
 
 
 public class PacmanGraphics extends Canvas{
@@ -42,8 +42,8 @@ public class PacmanGraphics extends Canvas{
 	private BufferedImage dotImage;
 	private List<Dot> dotList = new ArrayList<Dot>();
 
-	private DriveTrain driveTrain = DriveTrain.getInstance();
-	private Arm arm = Arm.getInstance();
+	private DriveTrain driveTrain = Robot.driveTrain;
+	//private Arm arm = Arm.getInstance();
 	
 	private BufferedImage getImage(String filename) {
 		BufferedImage sourceImage = null;
@@ -66,8 +66,9 @@ public class PacmanGraphics extends Canvas{
 		return score;
 	}
 	
-	public long getTime() {
-		return (long)(ticks * TICK_TIME_MS / 1000);
+	public int getTime() {
+		double time = ticks * (TICK_TIME_MS / 1000);
+		return (int) time;
 	}
 
 	
@@ -161,7 +162,7 @@ public class PacmanGraphics extends Canvas{
 		if (dot.getX() == x && dot.getY() == y) {
 			collision = true;
 			score++;
-			Util.log("YUM YUM "+score);
+			Util.log("score: "+score);
 		} else {
 			//System.out.printf("no collision dot %s,%s pacman %s,%s\n",dot.getX(), dot.getY(), x,y);
 		}
@@ -172,7 +173,6 @@ public class PacmanGraphics extends Canvas{
 
 
 	public void drawField(RobotBase robot) {
-
 		// keep track of time in ticks so game can run at different speeds
 		ticks++;
 
@@ -186,10 +186,7 @@ public class PacmanGraphics extends Canvas{
 		// draw the dots and check for collisions
 		for (Iterator<Dot> iterator = dotList.iterator(); iterator.hasNext();) {
 		    Dot d = iterator.next();
-			if (checkForCollision(d,driveTrain.getPositionX(), driveTrain.getPositionY())
-				|| checkForCollision(d,driveTrain.getPositionX()-arm.getLength(), driveTrain.getPositionY())
-				|| checkForCollision(d,driveTrain.getPositionX()+arm.getLength(), driveTrain.getPositionY())
-				)
+			if (checkForCollision(d,driveTrain.getPositionX(), driveTrain.getPositionY()))
 			{
 				iterator.remove();
 			} else {
@@ -215,6 +212,7 @@ public class PacmanGraphics extends Canvas{
 		// show the graphics
 		g.dispose();
 		strategy.show();
+
 	}
 
 

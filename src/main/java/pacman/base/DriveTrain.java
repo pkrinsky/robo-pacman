@@ -1,21 +1,21 @@
 package pacman.base;
 
-import pacman.graphics.PacmanGraphics;
-
 public class DriveTrain {
 	
-	public static int MAX_SPEED = 5;
 	private double distance = 0;
 	private int angle = 0;
-	private int posX = PacmanGraphics.WIDTH / 2;
-	private int posY = PacmanGraphics.HEIGHT - 100;
+	private int posX = 0;
+	private int posY = 0;
 	private int speed = 0;
+	private double left = 0;
+	private double right = 0;
 
-	// Singleton
-	private static DriveTrain driveTrain = new DriveTrain();
-
-	public static DriveTrain getInstance() {
-		return driveTrain;
+	public void update(int posX, int posY, int speed, double distance, int angle) {
+		this.posX = posX;
+		this.posY = posY;
+		this.speed = speed;
+		this.distance = distance;
+		this.angle = angle;
 	}
 
 	public double getDistance() {
@@ -45,67 +45,19 @@ public class DriveTrain {
 	public int getSpeed() {
 		return speed;
 	}
+
+	public double getLeft() {
+		return left;
+	}
+
+	public double getRight() {
+		return right;
+	}
 	
 	public void tankDrive(double left, double right) {
-		Util.log("DriveTrainBase:tankDrive left:"+left+" right:"+right);
+		this.left = left;
+		this.right = right;
+	}
 
-		// calculate speed and angle based on inputs
-		if (left == 0 && right == 0) {
-			// NEUTRAL: stop
-			speed = 0;
-			Util.log("DriveTrainBase:tankDrive neutral");
-		} else if (left > 0 && right > 0 && left == right) {
-			// FORWARD: increase speed
-			speed = MAX_SPEED;
-			Util.log("DriveTrainBase:tankDrive forward");
-		} else if (left < 0 && right < 0 && left == right) {
-			// REVERSE: increase speed
-			speed = -MAX_SPEED;
-			Util.log("DriveTrainBase:tankDrive reverse");
-		} else if (left >= 0 && left > right) {
-			// RIGHT TURN
-			if (speed == 0) {
-				angle += 90;	
-				Util.log("DriveTrainBase:tankDrive right to angle:"+angle);
-			} else {
-				Util.log("DriveTrainBase:tankDrive cant turn while moving");
-				speed = 0;
-			}
-		} else if (right >= 0 && right > left) {
-			if (speed == 0) {
-				angle -= 90;	
-				Util.log("DriveTrainBase:tankDrive left to angle:"+angle);
-			} else {
-				Util.log("DriveTrainBase:tankDrive cant turn while moving");
-				speed = 0;
-			}
-			
-		}
-
-		Util.log("DriveTrainBase:tankDrive speed:"+speed);
-
-		// keep angle [-179,180]
-		if (angle < -179) angle += 360;
-		if (angle > 180) angle -= 360;
-
-		// update position
-		if (angle == 0) {
-			posY = posY - speed;
-		} else if (angle == 180 || angle == -180) {
-			posY = posY + speed;
-		} else if (angle == 90) {
-			posX = posX + speed;
-		} else if (angle == -90) {
-			posX = posX - speed;
-		}
-
-		// update distance
-		distance += Math.abs(speed);
-
-
-		
-		Util.log("DriveTrainBase:tankDrive posX:"+posX+" posY:"+posY+" angle:"+angle+" dist:"+distance);
-		
-	}	
 
 }

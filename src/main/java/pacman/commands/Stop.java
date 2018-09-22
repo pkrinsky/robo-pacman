@@ -1,14 +1,14 @@
 package pacman.commands;
 
 import pacman.base.CommandBase;
-import pacman.base.DriveTrain;
+import pacman.robot.Robot;
 
 public class Stop extends CommandBase {
 
 	protected void execute() {
 		super.execute();
 		
-		DriveTrain.getInstance().tankDrive(0, 0);
+		Robot.driveTrain.tankDrive(0, 0);
 		
 	}
 	

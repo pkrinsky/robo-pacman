@@ -7,7 +7,7 @@ import pacman.base.Util;
 public class ExtendArm extends CommandBase {
 	
 	private boolean success = false;
-	private Arm arm = Arm.getInstance();
+	private Arm arm;
 	
 	protected void execute() {
 		Util.log("Extending Arm");

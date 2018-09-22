@@ -1,18 +1,25 @@
 package pacman.commands;
 
 import pacman.base.CommandBase;
-import pacman.base.DriveTrain;
+import pacman.robot.Robot;
 
 public class SpinForever extends CommandBase {
 
+	@Override
+	protected void initialize() {
+		System.out.println("init");
+	}
+
+	@Override
 	protected void execute() {
-		super.execute();
-		
-		System.out.println("Hello world, watch me spin to the right");
-		DriveTrain.getInstance().tankDrive(1, 0);
-		
+		System.out.println("execute");
+		Robot.driveTrain.tankDrive(1, 0);
 	}
 	
-	
-	
+	@Override
+	protected boolean isFinished() {
+		System.out.println("isFinished");
+		return false;
+	}
+
 }

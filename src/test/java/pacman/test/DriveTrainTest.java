@@ -7,89 +7,115 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import pacman.base.DriveTrain;
+import pacman.base.DriveTrainEngine;
+import pacman.robot.Robot;
 
 public class DriveTrainTest {
 
     
     @Test public void testSpeed() {
-    	DriveTrain dt = new DriveTrain();
+		DriveTrain driveTrain = new DriveTrain();
+		DriveTrainEngine engine = new DriveTrainEngine();
     	
     	// starting speed should be zero
-    	assertEquals("Speed zero",0,dt.getSpeed());
+    	assertEquals("Speed zero",0,driveTrain.getSpeed());
     	
     	// should immediately accelerate to max speed
-    	dt.tankDrive(1, 1);
-    	assertEquals("Speed max of "+DriveTrain.MAX_SPEED,DriveTrain.MAX_SPEED,dt.getSpeed());
+		driveTrain.tankDrive(1, 1);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Speed max of "+Robot.MAX_SPEED,Robot.MAX_SPEED,driveTrain.getSpeed());
 
     	// should maintain max speed even while driving full out
-    	dt.tankDrive(1, 1);
-    	dt.tankDrive(1, 1);
-    	assertEquals("Speed max of "+DriveTrain.MAX_SPEED,DriveTrain.MAX_SPEED,dt.getSpeed());
+		driveTrain.tankDrive(1, 1);
+		engine.tankDrive(driveTrain);
+		driveTrain.tankDrive(1, 1);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Speed max of "+Robot.MAX_SPEED,Robot.MAX_SPEED,driveTrain.getSpeed());
 
     	// should stop when trying to turn
-    	dt.tankDrive(1, 1);
-    	dt.tankDrive(0, 1);
-    	assertEquals("Speed should be zero",0,dt.getSpeed());
+		driveTrain.tankDrive(1, 1);
+		engine.tankDrive(driveTrain);
+		driveTrain.tankDrive(0, 1);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Speed should be zero",0,driveTrain.getSpeed());
     	
     	// should stop when trying to turn
-    	dt.tankDrive(1, 1);
-    	dt.tankDrive(1, 0);
-    	assertEquals("Speed should be zero",0,dt.getSpeed());
+		driveTrain.tankDrive(1, 1);
+		engine.tankDrive(driveTrain);
+		driveTrain.tankDrive(1, 0);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Speed should be zero",0,driveTrain.getSpeed());
 
     	// should immediately stop
-    	dt.tankDrive(0, 0);
-    	assertEquals("Speed should be zero",0,dt.getSpeed());
+		driveTrain.tankDrive(0, 0);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Speed should be zero",0,driveTrain.getSpeed());
 
     	// should accelerate to max for anything > 0
-    	dt.tankDrive(0, 0);
-    	dt.tankDrive(0.5, 0.5);
-    	assertEquals("Speed max of "+DriveTrain.MAX_SPEED,DriveTrain.MAX_SPEED,dt.getSpeed());
+		driveTrain.tankDrive(0, 0);
+		engine.tankDrive(driveTrain);
+		driveTrain.tankDrive(0.5, 0.5);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Speed max of "+Robot.MAX_SPEED,Robot.MAX_SPEED,driveTrain.getSpeed());
 
     	// should accelerate to max for anything > 0
-    	dt.tankDrive(0,0);
-    	dt.tankDrive(0, 0.5);
-    	assertEquals("Speed should be zero",0,dt.getSpeed());
+		driveTrain.tankDrive(0,0);
+		engine.tankDrive(driveTrain);
+		driveTrain.tankDrive(0, 0.5);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Speed should be zero",0,driveTrain.getSpeed());
 
     }
     
     @Test public void testAngle() {
-    	DriveTrain dt = new DriveTrain();
+		DriveTrain driveTrain = new DriveTrain();
+		DriveTrainEngine engine = new DriveTrainEngine();
     	
     	// starting angle should be zero
-    	assertEquals("Angle zero",0,dt.getAngle());
+    	assertEquals("Angle zero",0,driveTrain.getAngle());
     	
     	// right turn
-    	dt.tankDrive(1,0);
-    	assertEquals("Angle error",90,dt.getAngle());
+		driveTrain.tankDrive(1,0);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",90,driveTrain.getAngle());
 
-    	dt.tankDrive(1,0);
-    	assertEquals("Angle error",180,dt.getAngle());
+		driveTrain.tankDrive(1,0);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",180,driveTrain.getAngle());
 
-    	dt.tankDrive(1,0);
-    	assertEquals("Angle error",-90,dt.getAngle());
+		driveTrain.tankDrive(1,0);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",-90,driveTrain.getAngle());
 
-    	dt.tankDrive(1,0);
-    	assertEquals("Angle error",0,dt.getAngle());
+		driveTrain.tankDrive(1,0);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",0,driveTrain.getAngle());
     	
     	// left turn
-    	dt.tankDrive(0,1);
-    	assertEquals("Angle error",-90,dt.getAngle());
+		driveTrain.tankDrive(0,1);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",-90,driveTrain.getAngle());
 
-    	dt.tankDrive(0,1);
-    	assertEquals("Angle error",180,dt.getAngle());
+		driveTrain.tankDrive(0,1);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",180,driveTrain.getAngle());
 
-    	dt.tankDrive(0,1);
-    	assertEquals("Angle error",90,dt.getAngle());
+		driveTrain.tankDrive(0,1);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",90,driveTrain.getAngle());
 
-    	dt.tankDrive(0,1);
-    	assertEquals("Angle error",0,dt.getAngle());
+		driveTrain.tankDrive(0,1);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",0,driveTrain.getAngle());
 
     	// partial left turn should still be 90 degrees
-    	dt.tankDrive(0,0.5);
-    	assertEquals("Angle error",-90,dt.getAngle());
+		driveTrain.tankDrive(0,0.5);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",-90,driveTrain.getAngle());
     	
-    	dt.tankDrive(0.5,0);
-    	assertEquals("Angle error",0,dt.getAngle());
+		driveTrain.tankDrive(0.5,0);
+		engine.tankDrive(driveTrain);
+    	assertEquals("Angle error",0,driveTrain.getAngle());
     	
     }
 }
