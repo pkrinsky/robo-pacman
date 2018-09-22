@@ -32,8 +32,10 @@ public class PacmanGraphics extends Canvas{
 	
 	public static final int HEIGHT = 600;
 	public static final int WIDTH = 600;
+	public static final double TICK_TIME_MS = 50;
+
 	private int score = 0;
-	private long startTime = 0;
+	private int ticks = 0;
 
 	private BufferStrategy strategy;
 	private BufferedImage robotImage;
@@ -65,12 +67,12 @@ public class PacmanGraphics extends Canvas{
 	}
 	
 	public long getTime() {
-		return (System.currentTimeMillis() - startTime) / 1000;
+		return (long)(ticks * TICK_TIME_MS / 1000);
 	}
 
 	
 	public void setup() {
-		startTime = System.currentTimeMillis();
+		ticks = 0;
 		robotImage = getImage("robot.png");
 		dotImage = getImage("dot.png");
 		
@@ -118,7 +120,7 @@ public class PacmanGraphics extends Canvas{
 		for (int i=0;i<4;i++) {
 			y -= 50;
 			dotList.add(new Dot(x,y));	
-			dotList.add(new Dot(x-50,y));	
+			//dotList.add(new Dot(x-50,y));	
 		}
 		
 		for (int i=0;i<8;i++) {
@@ -148,6 +150,7 @@ public class PacmanGraphics extends Canvas{
 			dotList.add(new Dot(x,y));	
 		}
 
+
 		
 	}
 	
@@ -169,6 +172,9 @@ public class PacmanGraphics extends Canvas{
 
 
 	public void drawField(RobotBase robot) {
+
+		// keep track of time in ticks so game can run at different speeds
+		ticks++;
 
 		// init the graphics system to redraw the map
 		Graphics2D g = (Graphics2D) strategy.getDrawGraphics();

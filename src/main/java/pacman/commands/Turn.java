@@ -14,7 +14,13 @@ public class Turn extends CommandBase {
 		super();
 		
 		// save the target angle for later
-		this.targetAngle = angle;
+		// translate -180 to 180 as they are the same
+		if (angle == -180) {
+			this.targetAngle = 180;
+		} else {
+			this.targetAngle = angle;
+		}
+		
 		Util.log("Turn:targetAngle:"+targetAngle);
 	}
 	

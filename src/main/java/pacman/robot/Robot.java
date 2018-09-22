@@ -15,7 +15,8 @@ public class Robot extends RobotBase {
 
 	public static void main(String[] args) {
 		// how long to wait (in ms) before the next loop
-		long delay = 100;
+		// 50 is normal, longer better for debugging
+		long delay = 50;
 
 		// run the command group
 		RobotRunner.run(robot,new AutoGroup(), delay);

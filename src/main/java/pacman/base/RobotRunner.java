@@ -3,6 +3,8 @@ package pacman.base;
 import pacman.graphics.PacmanGraphics;
 
 public class RobotRunner {
+
+	public static final double MAX_TIME = 15;
 	
 	public static void run(RobotBase robot, CommandGroupBase group) {
 		run(robot,group,100);
@@ -20,7 +22,7 @@ public class RobotRunner {
 		PacmanGraphics graphics = new PacmanGraphics();
 		graphics.setup();
 		
-		while (running && graphics.getTime() < 30) {
+		while (running && graphics.getTime() < MAX_TIME) {
 			
 			// get a command from the group
 			CommandBase command = group.getCommand(currentCommand);
