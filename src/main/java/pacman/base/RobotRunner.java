@@ -26,7 +26,7 @@ public class RobotRunner {
 
 		driveTrainEngine.update(Robot.driveTrain);
 		
-		while (running && graphics.getTime() <= MAX_TIME) {
+		while (running && !graphics.getCaught() && graphics.getTime() <= MAX_TIME) {
 			
 			// get a command from the group
 			CommandBase command = group.getCommand(currentCommand);

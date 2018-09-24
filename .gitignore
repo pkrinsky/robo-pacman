@@ -1,14 +1,3 @@
 /bin
 /build
-/gradle
-/.gradle
-
-.classpath
-.classpath
-.project
-.settings/org.eclipse.buildship.core.prefs
-buildlib.bat
-.vscode/launch.json
-build.gradle
-gradlew
-gradlew.bat
+.gradle
