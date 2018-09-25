@@ -36,6 +36,7 @@ public class PacmanGraphics extends Canvas{
 
 	private int score = 0;
 	private int ticks = 0;
+	private int level = 1;
 	private boolean caught = false;
 
 	private BufferStrategy strategy;
@@ -78,9 +79,14 @@ public class PacmanGraphics extends Canvas{
 		return (int) time;
 	}
 
+	public List<Ghost> getGhostList() {
+		return ghostList;
+	}
+
 	
-	public void setup() {
+	public void setup(int level) {
 		ticks = 0;
+		this.level = level;
 		robotImage = getImage("robot.png");
 		dotImage = getImage("dot.png");
 		ghostImage = getImage("ghost.png");
@@ -160,9 +166,12 @@ public class PacmanGraphics extends Canvas{
 		}
 
 		// create the ghosts
-		ghostList.add(new Ghost(100,300));
-		ghostList.add(new Ghost(100,400));
-		ghostList.add(new Ghost(100,500));
+		if (level > 1) {
+			ghostList.add(new Ghost(100,300));
+			ghostList.add(new Ghost(100,400));
+			ghostList.add(new Ghost(100,500));
+		}
+
 
 		
 	}
@@ -182,13 +191,12 @@ public class PacmanGraphics extends Canvas{
 		return collision;
 	}
 	
-	private boolean checkForCollision(Ghost ghost, int x, int y) {
+	public static boolean checkForCollision(Ghost ghost, int x, int y) {
 		boolean collision = false;
 		
 		if ((Math.abs((ghost.getX()- x)) < 25) && ghost.getY() == y) {
 			collision = true;
-			caught = true;
-			Util.log("Ghost!");
+
 		} else {
 			//System.out.printf("no collision dot %s,%s pacman %s,%s\n",dot.getX(), dot.getY(), x,y);
 		}
@@ -229,6 +237,8 @@ public class PacmanGraphics extends Canvas{
 			}
 			if (checkForCollision(ghost,driveTrain.getPositionX(), driveTrain.getPositionY()))
 			{
+				caught = true;
+				Util.log("Ghost!");
 				iterator.remove();
 			} else {
 				g.drawImage(ghostImage, ghost.getX(), ghost.getY(), null);
@@ -251,7 +261,7 @@ public class PacmanGraphics extends Canvas{
 		}
 		
 		g.setColor(Color.white);
-		g.drawString("Time "+getTime()+" Score "+score,25,25);
+		g.drawString("Time "+getTime()+" Level "+level+" Score "+score,25,25);
 		
 		// show the graphics
 		g.dispose();

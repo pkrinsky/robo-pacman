@@ -4,15 +4,17 @@ import pacman.graphics.PacmanGraphics;
 import pacman.robot.Robot;
 
 public class RobotRunner {
-	
-	private DriveTrainEngine driveTrainEngine = new DriveTrainEngine();
+
 	public static final int MAX_TIME = 15;
 	
+	private DriveTrainEngine driveTrainEngine = new DriveTrainEngine();
+	private GhostSensorEngine ghostSensorEngine = new GhostSensorEngine();
+	
 	public void run(RobotBase robot, CommandGroupBase group) {
-		run(robot,group,100);
+		run(robot,group,100,1);
 	}
 	
-	public void run(RobotBase robot, CommandGroupBase group, long delay) {
+	public void run(RobotBase robot, CommandGroupBase group, long delay, int level) {
 		
 		boolean running = true;
 		int currentCommand = 0;
@@ -22,7 +24,7 @@ public class RobotRunner {
 		robot.robotInit();
 		
 		PacmanGraphics graphics = new PacmanGraphics();
-		graphics.setup();
+		graphics.setup(level);
 
 		driveTrainEngine.update(Robot.driveTrain);
 		
@@ -58,8 +60,17 @@ public class RobotRunner {
 					command.initialize();
 					runInit = false;
 				}
+				// update all sensors before executing command
+				Robot.ghostSensor.setPing(ghostSensorEngine.getPing(Robot.driveTrain.getPositionX(), 
+					Robot.driveTrain.getPositionY(), 
+					Robot.driveTrain.getAngle(), 
+					graphics.getGhostList()));
+
+				// run the command
 				Util.log("RobotRunner:execute command "+command.getClass().getName());
 				command.execute();	
+
+				//move pacman based upon current values from the drivetrain
 				driveTrainEngine.tankDrive(Robot.driveTrain);
 			}
 			

@@ -12,7 +12,7 @@ public class SpinForever extends CommandBase {
 
 	@Override
 	protected void execute() {
-		System.out.println("execute");
+		System.out.println("execute ghost ping:"+Robot.ghostSensor.getPing());
 		Robot.driveTrain.tankDrive(1, 0);
 	}
 	
