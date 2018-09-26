@@ -119,60 +119,37 @@ public class PacmanGraphics extends Canvas{
 		strategy = getBufferStrategy();
 		
 		// create the dots
-		int x = PacmanGraphics.WIDTH / 2;
-		int y = PacmanGraphics.HEIGHT - 100;
-		
-		for (int i=0;i<4;i++) {
-			y -= 50;
-			dotList.add(new Dot(x,y));	
-		}
-		
-		for (int i=0;i<4;i++) {
+		int x = 50;
+		for (int i=0;i<11;i++) {
+			dotList.add(new Dot(x,100));	
+			dotList.add(new Dot(x,250));	
+			dotList.add(new Dot(x,400));	
 			x += 50;
-			dotList.add(new Dot(x,y));	
 		}
-		
-		for (int i=0;i<4;i++) {
-			y -= 50;
-			dotList.add(new Dot(x,y));	
-			//dotList.add(new Dot(x-50,y));	
-		}
-		
-		for (int i=0;i<8;i++) {
-			x -= 50;
-			dotList.add(new Dot(x,y));	
-		}
-		
-		for (int i=0;i<6;i++) {
-			y += 50;
-			dotList.add(new Dot(x,y));	
-		}
-		
-		y += 50;
-		x += 50;
-		dotList.add(new Dot(x,y));	
-		
-		y += 50;
-		x += 50;
-		dotList.add(new Dot(x,y));	
-		
-		y += 50;
-		x += 50;
-		dotList.add(new Dot(x,y));	
 
-		for (int i=0;i<5;i++) {
-			x += 50;
-			dotList.add(new Dot(x,y));	
-		}
+		dotList.add(new Dot(50,150));
+		dotList.add(new Dot(50,200));	
+		dotList.add(new Dot(50,300));
+		dotList.add(new Dot(50,350));	
+		
+		dotList.add(new Dot(300,150));
+		dotList.add(new Dot(300,200));	
+		dotList.add(new Dot(300,300));
+		dotList.add(new Dot(300,350));	
+
+		dotList.add(new Dot(550,150));
+		dotList.add(new Dot(550,200));	
+		dotList.add(new Dot(550,300));
+		dotList.add(new Dot(550,350));	
 
 		// create the ghosts
 		if (level > 1) {
-			ghostList.add(new Ghost(100,300));
-			ghostList.add(new Ghost(100,400));
-			ghostList.add(new Ghost(100,500));
+			ghostList.add(new Ghost(250,100));
+			ghostList.add(new Ghost(250,250));
+			ghostList.add(new Ghost(250,400));
 		}
 
-
+		
 		
 	}
 	

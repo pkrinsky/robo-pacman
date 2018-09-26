@@ -20,12 +20,13 @@ public class RobotRunner {
 		int currentCommand = 0;
 		boolean runInit = true;
 		
-		Util.log("RobotRunner:robot.robotInit");
+		Util.log("RobotRunner:robot.robotInit startingPosition:"+robot.getStartingPosition());
 		robot.robotInit();
 		
 		PacmanGraphics graphics = new PacmanGraphics();
 		graphics.setup(level);
 
+		driveTrainEngine.setup(robot.getStartingPosition());
 		driveTrainEngine.update(Robot.driveTrain);
 		
 		while (running && !graphics.getCaught() && graphics.getTime() <= MAX_TIME) {

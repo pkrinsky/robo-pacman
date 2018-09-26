@@ -7,8 +7,8 @@ public class DriveTrainEngine {
 	
 	private double distance = 0;
 	private int angle = 0;
-	private int posX = PacmanGraphics.WIDTH / 2;
-	private int posY = PacmanGraphics.HEIGHT - 100;
+	private int posX = 0;
+	private int posY = 0;
 	private int speed = 0;
 	private double left = 0;
 	private double right = 0;
@@ -80,6 +80,19 @@ public class DriveTrainEngine {
 
 	public void update(DriveTrain driveTrain) {
 		driveTrain.update(posX,posY,speed,distance,angle);
+	}
+
+	public void setup(int startingPosition) {
+		posY =500;
+		
+		if (startingPosition == 1) {
+			posX = 50;
+		} else if (startingPosition == 2) {
+			posX = 300;
+		} else { 
+			posX = 550;
+		}
+
 	}
 
 }
