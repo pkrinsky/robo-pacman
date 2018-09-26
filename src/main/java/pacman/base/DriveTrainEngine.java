@@ -1,6 +1,5 @@
 package pacman.base;
 
-import pacman.graphics.PacmanGraphics;
 import pacman.robot.Robot;
 
 public class DriveTrainEngine {
@@ -84,7 +83,7 @@ public class DriveTrainEngine {
 
 	public void setup(int startingPosition) {
 		posY =500;
-		
+
 		if (startingPosition == 1) {
 			posX = 50;
 		} else if (startingPosition == 2) {
