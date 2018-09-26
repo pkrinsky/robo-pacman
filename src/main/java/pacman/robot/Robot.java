@@ -3,7 +3,7 @@ package pacman.robot;
 
 import pacman.base.RobotBase;
 import pacman.base.RobotRunner;
-import pacman.commands.SpinGroup;
+import pacman.commands.AutoGroup;
 
 public class Robot extends RobotBase {
 
@@ -21,7 +21,7 @@ public class Robot extends RobotBase {
 		Robot robot = new Robot();
 
 		// run the command group
-		robotRunner.run(robot, new SpinGroup(), RUN_SLOW,2);
+		robotRunner.run(robot, new AutoGroup(), RUN_SLOW,2);
 
 	}
 

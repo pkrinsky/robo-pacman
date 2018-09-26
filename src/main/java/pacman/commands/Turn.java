@@ -1,49 +1,36 @@
 package pacman.commands;
 
 import pacman.base.CommandBase;
-import pacman.base.DriveTrain;
-import pacman.base.Util;
 import pacman.robot.Robot;
 
 public class Turn extends CommandBase {
 	
 	private boolean success = false;
 	private int targetAngle;
-	private DriveTrain driveTrain = Robot.driveTrain;
 	
 	public Turn(int angle) {
-		super();
-		
-		// save the target angle for later
-		// translate -180 to 180 as they are the same
-		if (angle == -180) {
-			this.targetAngle = 180;
-		} else {
-			this.targetAngle = angle;
-		}
-		
-		Util.log("Turn:targetAngle:"+targetAngle);
+		this.targetAngle = angle;
 	}
 	
-	// Called repeatedly when this Command is scheduled to run
+	@Override
 	protected void execute() {
-		int currentAngle = driveTrain.getAngle();
-		Util.log("Turn:currentAngle:"+currentAngle);
+		int currentAngle = Robot.driveTrain.getAngle();
 		
 		// if we have turned far enough then stop
 		if (currentAngle == targetAngle) {
-			driveTrain.tankDrive(0, 0);
+			Robot.driveTrain.tankDrive(0, 0);
 			success = true;
 		} else {
 			// compare the current to the target angle to see which way to turn
 			if (currentAngle < targetAngle) {
-				driveTrain.tankDrive(1, -1);	
+				Robot.driveTrain.tankDrive(1, -1);	
 			} else {
-				driveTrain.tankDrive(-1, 1);
+				Robot.driveTrain.tankDrive(-1, 1);
 			}
 		}
 	}
 
+	@Override
 	protected boolean isFinished() {
 		return success;	
 	}

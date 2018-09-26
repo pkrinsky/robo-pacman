@@ -5,11 +5,9 @@ import pacman.robot.Robot;
 
 public class Stop extends CommandBase {
 
+	@Override
 	protected void execute() {
-		super.execute();
-		
 		Robot.driveTrain.tankDrive(0, 0);
-		
 	}
 	
 	

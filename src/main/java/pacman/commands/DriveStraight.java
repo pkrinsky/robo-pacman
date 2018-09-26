@@ -1,8 +1,6 @@
 package pacman.commands;
 
 import pacman.base.CommandBase;
-import pacman.base.DriveTrain;
-import pacman.base.Util;
 import pacman.robot.Robot;
 
 public class DriveStraight extends CommandBase {
@@ -10,37 +8,33 @@ public class DriveStraight extends CommandBase {
 	private double targetDistance;
 	private double startDistance;
 	private boolean success = false;
-	private DriveTrain driveTrain = Robot.driveTrain;
 	
 	public DriveStraight(double distance) {
-		super();
 		// save the target distance for later
 		this.targetDistance = distance;
-		Util.log("DriveStraight:targetDistance:"+targetDistance);
 	}
 
-	// Called just before this Command runs the first time
+	@Override
 	protected void initialize() {
 		// save the starting point for later
-		startDistance = driveTrain.getDistance();
+		startDistance = Robot.driveTrain.getDistance();
 	}
 
-	// Called repeatedly when this Command is scheduled to run
+	@Override
 	protected void execute() {
 		// calc distance traveled since this command started
-		double currentDistance = driveTrain.getDistance() - startDistance;
-		Util.log("DriveStraight:currentDistance:"+currentDistance);
+		double currentDistance = Robot.driveTrain.getDistance() - startDistance;
 		
 		// if we have gone far enough then stop
 		if (currentDistance >= targetDistance) {
-			driveTrain.tankDrive(0, 0);
+			Robot.driveTrain.tankDrive(0, 0);
 			success = true;
 		} else {
-			driveTrain.tankDrive(1, 1);
+			Robot.driveTrain.tankDrive(1, 1);
 		}
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
+	@Override
 	protected boolean isFinished() {
 		return success;
 	}

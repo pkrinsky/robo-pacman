@@ -1,5 +1,7 @@
 package pacman.base;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import pacman.graphics.PacmanGraphics;
 import pacman.robot.Robot;
 
@@ -20,13 +22,13 @@ public class RobotRunner {
 		int currentCommand = 0;
 		boolean runInit = true;
 		
-		Util.log("RobotRunner:robot.robotInit startingPosition:"+robot.getStartingPosition());
+		Util.log("RobotRunner:robot.robotInit");
 		robot.robotInit();
 		
 		PacmanGraphics graphics = new PacmanGraphics();
 		graphics.setup(level);
 
-		driveTrainEngine.setup(robot.getStartingPosition());
+		driveTrainEngine.setup(ThreadLocalRandom.current().nextInt(1,4));
 		driveTrainEngine.update(Robot.driveTrain);
 		
 		while (running && !graphics.getCaught() && graphics.getTime() <= MAX_TIME) {
