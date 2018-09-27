@@ -86,11 +86,20 @@ public class DriveTrainEngine {
 
 		if (startingPosition == 1) {
 			posX = 50;
-		} else if (startingPosition == 2) {
-			posX = 300;
-		} else { 
-			posX = 550;
+			posY = 100;
 		}
+		if (startingPosition == 2) {
+			posX = 550;
+			posY = 100;
+		}
+		if (startingPosition == 3) {
+			posX = 50;
+			posY = 400;
+		}
+		if (startingPosition == 4) {
+			posX = 550;
+			posY = 400;
+		}		
 
 	}
 

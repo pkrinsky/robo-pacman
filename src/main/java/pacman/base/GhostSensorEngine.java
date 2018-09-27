@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GhostSensorEngine {
 
-    public static int MAX_RANGE = 200;
+    public static int MAX_RANGE = 100;
 
     public int getPing(int posX, int posY, int angle, List<Ghost> ghostList) {
         int range = 0;

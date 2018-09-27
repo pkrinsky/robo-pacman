@@ -29,7 +29,7 @@ public class Ghost {
 	public int getMove() {
 		if (duration == 0) {
 			duration = ThreadLocalRandom.current().nextInt(3, 10);
-			direction = ThreadLocalRandom.current().nextInt(-20, 20);
+			direction = ThreadLocalRandom.current().nextInt(-5, 5);
 		} else {
 			duration--;
 		}

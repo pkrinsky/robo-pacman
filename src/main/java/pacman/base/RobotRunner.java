@@ -7,7 +7,7 @@ import pacman.robot.Robot;
 
 public class RobotRunner {
 
-	public static final int MAX_TIME = 15;
+	public static final int MAX_TIME = 100;
 	
 	private DriveTrainEngine driveTrainEngine = new DriveTrainEngine();
 	private GhostSensorEngine ghostSensorEngine = new GhostSensorEngine();
@@ -19,8 +19,10 @@ public class RobotRunner {
 	public void run(RobotBase robot, CommandGroupBase group, long delay, int level) {
 		
 		boolean running = true;
-		int currentCommand = 0;
 		boolean runInit = true;
+		int currentCommand = 0;
+		int startingPosition = 4;
+		int ping = 0;
 		
 		Util.log("RobotRunner:robot.robotInit");
 		robot.robotInit();
@@ -28,7 +30,12 @@ public class RobotRunner {
 		PacmanGraphics graphics = new PacmanGraphics();
 		graphics.setup(level);
 
-		driveTrainEngine.setup(ThreadLocalRandom.current().nextInt(1,4));
+		// starting position is randomized for level 3 and above
+		if (level >= 3) {
+			startingPosition = ThreadLocalRandom.current().nextInt(1,5);
+		}
+
+		driveTrainEngine.setup(startingPosition);
 		driveTrainEngine.update(Robot.driveTrain);
 		
 		while (running && !graphics.getCaught() && graphics.getTime() <= MAX_TIME) {
@@ -63,11 +70,14 @@ public class RobotRunner {
 					command.initialize();
 					runInit = false;
 				}
+				
 				// update all sensors before executing command
-				Robot.ghostSensor.setPing(ghostSensorEngine.getPing(Robot.driveTrain.getPositionX(), 
+				ping = ghostSensorEngine.getPing(Robot.driveTrain.getPositionX(), 
 					Robot.driveTrain.getPositionY(), 
 					Robot.driveTrain.getAngle(), 
-					graphics.getGhostList()));
+					graphics.getGhostList());
+
+				Robot.ghostSensor.setPing(ping);
 
 				// run the command
 				Util.log("RobotRunner:execute command "+command.getClass().getName());
