@@ -9,7 +9,12 @@ public class Turn extends CommandBase {
 	private int targetAngle;
 	
 	public Turn(int angle) {
-		this.targetAngle = angle;
+		// special case for -180 as it is same as 180
+		if (angle == -180) {
+			this.targetAngle = 180;
+		} else {
+			this.targetAngle = angle;
+		}
 	}
 	
 	@Override

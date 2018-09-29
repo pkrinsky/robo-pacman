@@ -12,13 +12,12 @@ public class SpinForever extends CommandBase {
 
 	@Override
 	protected void execute() {
-		System.out.println("execute ghost ping:"+Robot.ghostSensor.getPing());
 		Robot.driveTrain.tankDrive(1, 0);
+		sleep(200);
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		System.out.println("isFinished");
 		return false;
 	}
 

@@ -91,7 +91,7 @@ public class PacmanGraphics extends Canvas{
 		dotImage = getImage("dot.png");
 		ghostImage = getImage("ghost.png");
 		
-		JFrame container = new JFrame("Robo Pacman");
+		JFrame container = new JFrame("294 Robo Pacman");
 		
 		JPanel panel = (JPanel) container.getContentPane();
 		panel.setPreferredSize(new Dimension(WIDTH,HEIGHT));

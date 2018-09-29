@@ -7,7 +7,7 @@ import pacman.robot.Robot;
 
 public class RobotRunner {
 
-	public static final int MAX_TIME = 100;
+	public static final int MAX_TIME = 60;
 	
 	private DriveTrainEngine driveTrainEngine = new DriveTrainEngine();
 	private GhostSensorEngine ghostSensorEngine = new GhostSensorEngine();

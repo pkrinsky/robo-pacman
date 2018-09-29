@@ -1,8 +1,8 @@
 package pacman.base;
 
-import pacman.robot.Robot;
-
 public class DriveTrainEngine {
+
+	public static int MAX_SPEED = 5;
 	
 	private double distance = 0;
 	private int angle = 0;
@@ -24,11 +24,11 @@ public class DriveTrainEngine {
 			Util.log("tankDrive neutral");
 		} else if (left > 0 && right > 0 && left == right) {
 			// FORWARD: increase speed
-			speed = Robot.MAX_SPEED;
+			speed = MAX_SPEED;
 			Util.log("tankDrive forward");
 		} else if (left < 0 && right < 0 && left == right) {
 			// REVERSE: increase speed
-			speed = -Robot.MAX_SPEED;
+			speed = -MAX_SPEED;
 			Util.log("tankDrive reverse");
 		} else if (left >= 0 && left > right) {
 			// RIGHT TURN
